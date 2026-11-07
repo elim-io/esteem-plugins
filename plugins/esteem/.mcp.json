@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "esteem": {
+      "type": "http",
+      "url": "https://mcp.api.esteem.team/mcp"
+    }
+  }
+}

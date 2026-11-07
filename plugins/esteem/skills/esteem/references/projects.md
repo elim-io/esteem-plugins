@@ -1,0 +1,155 @@
+# esteem: projects
+
+Generated from the CLI by `cargo run --example skill`; edit the CLI's help, never this file. `r` reads, `w` writes (`--dry-run`, then `--yes` once the person agrees); `disk` needs a local file, `machine` the person's own machine. Flags: `esteem <command> --schema`.
+
+- `esteem pm tasks statuses list` r: Every status, in order
+- `esteem pm tasks statuses create` w: Add a status at the end; --default makes it its category's default
+- `esteem pm tasks statuses rename` w: Rename a status
+- `esteem pm tasks statuses default` w: Make a status the default of its category
+- `esteem pm tasks statuses color` w: Give a status its own colour, one of the twelve project colours, or --clear it back to its category'...
+- `esteem pm tasks statuses reorder` w: REPLACE the order: every status id, in the new order
+- `esteem pm tasks statuses delete` w: Delete a status; its tasks move to the category's default
+- `esteem pm tasks list` r: Tasks by a filter, grouped (--group, --sub), a page per group; --trashed = the trash
+- `esteem pm tasks mine` r: My tasks by due: overdue, today, tomorrow, this week, this month, later, no date
+- `esteem pm tasks search` r: Find tasks (words, a number), projects or comments; #handle, +name, !1 filter
+- `esteem pm tasks get` r: One task: its fields, assignees, subtasks, subscribers
+- `esteem pm tasks add` w: Create a task from a quick-add line: '#handle title завтра !2 +name' (requires --yes; --dry-run prin...
+- `esteem pm tasks update` w: PATCH a task: only the flags you pass change; --clear empties
+- `esteem pm tasks move` w: Move a task with its subtree: another project, a section, under a parent, an order
+- `esteem pm tasks duplicate` w: Copy a task right after it: fields, assignees, labels, dates, estimate and its subtasks; no time, co...
+- `esteem pm tasks trash` w: Put tasks in the trash with their subtrees, one batch
+- `esteem pm tasks restore` w: Bring a task back from the trash with its subtree
+- `esteem pm tasks tree` r: The subtree under a task, depth-first
+- `esteem pm tasks subtask create` w: A subtask under a task, in its project and its root's section
+- `esteem pm tasks history` r: The task's history, newest first: kind, via, actor, before, after
+- `esteem pm tasks activity` r: The task card's feed, newest first: comments, field changes and logged time in one list (--cursor pa...
+- `esteem pm tasks hide` w: Hide a task, until a day or without one
+- `esteem pm tasks unhide` w: Show a hidden task again
+- `esteem pm tasks link` w: Link two tasks: --blocks, --blocked-by or --relates; a loop of blocks is refused with its path (requ...
+- `esteem pm tasks unlink` w: Remove a link
+- `esteem pm tasks subscribe` w: Subscribe yourself or --person to a task
+- `esteem pm tasks unsubscribe` w: Unsubscribe yourself or --person
+- `esteem pm tasks recur set` w: Set or replace the rule of an open task
+- `esteem pm tasks recur stop` w: Remove the rule; copies already made stay
+- `esteem pm tasks bulk` w: One patch, the trash or copies for many tasks (--ids, or --filter and a group of it, at most 300), a...
+- `esteem pm tasks reschedule` w: One due date, or none, for every open task of a due group (--group overdue), past the first page; at...
+- `esteem pm tasks apply` w disk: Write back an edited `pm tasks list --group none` TSV, all or nothing (requires --yes; --dry-run sho...
+- `esteem pm tasks undo` w: Undo a batch of a bulk edit, an apply or a trash
+- `esteem pm tasks comments list` r: A task's comments, oldest first; a reply names the comment it answers (REPLY_TO)
+- `esteem pm tasks comments add` w: Comment on a task; `@Name Surname` or `@psn_...` subscribes and notifies a member
+- `esteem pm tasks comments edit` w: Rewrite your own comment
+- `esteem pm tasks comments rm` w: Delete a comment, yours or as an Owner/Admin; with replies it shows as "[удалено]", `restore` brings...
+- `esteem pm tasks comments restore` w: Bring a deleted comment back with its files, within 30 days of the delete
+- `esteem pm tasks comments attach` w disk: Add a file to your own comment, at most 10 a comment
+- `esteem pm tasks attach` w disk: Upload a file to a task: a presigned link, then the confirm
+- `esteem pm tasks attachments list` r: A task's files: its own and its comments'
+- `esteem pm tasks attachments rm` w: Delete a file: the row and the object; a comment's file - its author, an Owner or a...
+- `esteem pm tasks attachments url` r: A signed read link, valid 15 minutes
+- `esteem pm checkpoints` r: A month's checkpoints (tasks with the flag): date, number, title, state (open, reached, overdue, can...
+- `esteem pm plan project` r: A project's weeks: people (or roles) by week, `plan/fact`, "no date", the total; with --tasks the ta...
+- `esteem pm plan load` r: Everybody you may see the week of: `plan/available load%` per week, `!` = overloaded, days off, the ...
+- `esteem pm plan week` r: One person's week: the norm minus the days off, the plan of every project (the ones you do not see a...
+- `esteem pm plan budget` r: The budget by role: sold (the source estimate's hours, or typed), planned, spent, remaining, overrun...
+- `esteem pm projects list` r: List projects; --with-health or --group reads the dashboard
+- `esteem pm projects get` r: Get one project by `prj_` id or `#handle`; --overview prints its numbers
+- `esteem pm projects create` w: Create a project; with --prefix --stream its handle is `<prefix>-<stream>`
+- `esteem pm projects update` w: Update one project — PATCH, only the flags you pass change; "" clears; a new --handle or --prefix re...
+- `esteem pm projects apply` w disk: Apply an edited `projects list` TSV: update changed rows, create id-less ones
+- `esteem pm projects trash` w: Move a project to the trash (reversible) — refused while obligation lines point at it
+- `esteem pm projects restore` w: Restore a deleted project and what its trash took (member grants do NOT come back)
+- `esteem pm projects delete` w: Permanently delete a trashed project (NOT reversible — see `trash` instead)
+- `esteem pm projects members list` r: Who is on the project; the lead is marked
+- `esteem pm projects members add` w: Put a person on the roster — they can open the project from their next request. Lea...
+- `esteem pm projects members remove` w: Take a person off the roster. Their tasks and time stay theirs; the project goes ou...
+- `esteem pm projects members role` w: A person's role on the project: member (writes its tasks) or guest (reads, comments) (requires --yes...
+- `esteem pm projects lead set` w: Make a person the project's lead. They join the roster if they are not on it; the p...
+- `esteem pm projects lead clear` w: Leave the project without a lead; the former lead stays a member
+- `esteem pm projects share` w: Put somebody on the project by e-mail or `psn_` id: a member of the organization jo...
+- `esteem pm projects unshare` w: Take a person off the project = `members remove`
+- `esteem pm projects order` w: Your own sidebar order: the projects in the order you want them
+- `esteem pm projects sort` w: How your sidebar orders projects: activity (the newest last activity first), name, manual (requires ...
+- `esteem pm projects favorite` w: Put a project into your favourites - the block on top of your sidebar; it is shown again if hidden (...
+- `esteem pm projects unfavorite` w: Take a project out of your favourites
+- `esteem pm projects hide` w: Hide a project from your sidebar - still found by the search, still in "My active" while you have ta...
+- `esteem pm projects unhide` w: Show a hidden project in your sidebar again
+- `esteem pm projects sidebar` w: Your sidebar's settings - show (mine|all), status, group, sort: printed without a flag, set with any...
+- `esteem pm projects preview` r: The sidebar's hover card of a project: open, done, overdue, this month's hours, the last update's he...
+- `esteem pm projects archive` w: Archive a project — out of the sidebar, kept in reports, never purged. Not the tras...
+- `esteem pm projects unarchive` w: Bring an archived project back
+- `esteem pm projects history` r: The project's feed, newest first: its events, its tasks' and the project's own comments (--cursor pa...
+- `esteem pm projects comment` w: Comment on the project itself, its Activity tab
+- `esteem pm projects health` r: The project's Health tab: the health of each week, this week's closed, overdue and due tasks, the re...
+- `esteem pm projects groups list` r: Every group, in sidebar order
+- `esteem pm projects groups create` w: Add a group at the end
+- `esteem pm projects groups rename` w: PATCH a group's label, icon or colour; the key stays
+- `esteem pm projects groups reorder` w: REPLACE the order: every group id, in the new order
+- `esteem pm projects groups delete` w: Delete a group; one with projects needs --move-to
+- `esteem pm projects streams list` r: The dictionary, in order
+- `esteem pm projects streams set` w: REPLACE the dictionary: every key, in order. A key left out is removed — refused wh...
+- `esteem pm projects settings get` r: The defaults and the timezone
+- `esteem pm projects settings set` w: Change only the settings named
+- `esteem pm projects estimates list` r: The project's estimates: the source first
+- `esteem pm projects estimates link` w: Link an approved estimate; the first link is the source
+- `esteem pm projects estimates unlink` w: Unlink an estimate; the source goes last
+- `esteem pm projects budget set` w: Type the budget by role, replacing the typed one: --role RS-03=40h --role RP-02=120...
+- `esteem pm projects budget clear` w: Remove the typed budget
+- `esteem pm projects context` r: Enter a project in one read: status, lead, open tasks, knowledge, links with digests, gaps
+- `esteem pm projects files list` r: The project's files by path; --trash for those in the trash
+- `esteem pm projects files upload` w disk: Upload a file; the same path again is its next version
+- `esteem pm projects files upload-link` w: A signed PUT link of 15 minutes for one file, for what has no disk here; then `file...
+- `esteem pm projects files confirm` w: Confirm the bytes sent to an upload link; --base-version refuses a file that moved ...
+- `esteem pm projects files archive` r: A signed link of 15 minutes to all the live files as one tar, up to 1 GiB
+- `esteem pm projects files versions` r: A file's versions, newest first: the last ten
+- `esteem pm projects files url` r: A signed read link of 15 minutes
+- `esteem pm projects files trash` w: Move a file to the trash
+- `esteem pm projects files restore` w: Bring a file back from the trash
+- `esteem pm projects pull` r machine: The project's files in a folder to work on, with a generated CLAUDE.md. Never overwrites a change: c...
+- `esteem pm projects push` w machine: Send the folder's changed files; nothing runs in the background. Newer on the serve...
+- `esteem pm projects links list` r: The project's links, oldest first
+- `esteem pm projects links add` w: Add a link; the same address again replaces its label
+- `esteem pm projects links remove` w: Remove a link
+- `esteem pm sections list` r: The project's sections in order, with the open tasks hidden until a date in each
+- `esteem pm sections create` w: Add a section at the end of the project
+- `esteem pm sections rename` w: PATCH a section's name or description
+- `esteem pm sections reorder` w: REPLACE the order: every section of the project, in the new order
+- `esteem pm sections delete` w: Delete a section; its tasks go to --move-to, or to "Без секции"
+- `esteem pm labels list` r: The organization's labels, plus the project's with --project
+- `esteem pm labels create` w: A label of the organization, or of a project with --project
+- `esteem pm labels rename` w: Rename a label and/or recolour it; the name is unique in its scope ignoring case
+- `esteem pm labels rm` w: Delete a label: it comes off every task, the tasks stay
+- `esteem pm prefixes list` r: Every prefix: key, company or internal (a company's only with one of your projects)
+- `esteem pm prefixes create` w: Add a prefix: a company's (--company) or an internal direction's (--internal)
+- `esteem pm prefixes rename` w: Rename a prefix and every handle under it; old key and handles keep answering. --dry-run prints was ...
+- `esteem pm prefixes archive` w: Archive a prefix: its projects stay, it takes no new one
+- `esteem pm prefixes delete` w: Delete a prefix no project holds - live, archived or in the trash; its former keys are free again (r...
+- `esteem pm people list` r: List people: id, name, kind (member | external | former), e-mail where you may see it, catalog role,...
+- `esteem pm people set` w: Set a person's catalog role and own working week (Owner, Admin; requires --yes)
+- `esteem pm absences list` r: Absences sharing a day with --from..--to, by start: id, person, days, kind
+- `esteem pm absences add` w: Add an absence (yours, or anybody's for an Owner or an Admin; requires --yes)
+- `esteem pm absences edit` w: Change an absence's days or kind
+- `esteem pm absences rm` w: Delete an absence for good
+- `esteem pm time list` r: Time entries of a window: yours, every entry of the projects you lead (every project with projects `...
+- `esteem pm time add` w: Log time on a project, a task optional (requires --yes; --dry-run shows the entry). An entry ending ...
+- `esteem pm time confirm` w: Confirm the past DRAFTs of a window: this week (--week) or --from --to
+- `esteem pm time edit` w: PATCH an entry: only the flags you pass change; --clear empties
+- `esteem pm time rm` w: Put an entry in the trash
+- `esteem pm time restore` w: Bring an entry back from the trash
+- `esteem pm time report` r: The Сводная: hours by person, company, discipline, project, task with a column per day, week or mont...
+- `esteem pm time export` r disk: A company's hours for an invoice: one row per entry (CLIENT_MONTH CSV) into OUT
+- `esteem pm updates list` r: A project's updates, newest first
+- `esteem pm updates get` r: One update with its whole text
+- `esteem pm updates post` w: Post an update: the project's health becomes its health (requires --yes; --dry-run shows it)
+- `esteem pm updates edit` w: Edit an update: only what you pass changes
+- `esteem pm updates export` r disk: The project's updates as one Markdown document into OUT, oldest first
+- `esteem pm updates rm` w: Delete an update - the author, the project's lead, an Owner, an Admin or a member with all projects;...
+- `esteem pm views list` r: Your personal views and every shared one, by name
+- `esteem pm views get` r: One view with its state (`--json`: the state in the proto JSON form `--state` reads)
+- `esteem pm views create` w: Save a view: a state file, the list flags written over it, or both
+- `esteem pm views update` w: Change a view: only what you pass; list flags edit its state
+- `esteem pm views delete` w: Delete a view
+- `esteem pm views apply` r: Open a view: its screen's list with the fields of its state
+- `esteem pm views default` w: Your own default view of a context; `--team` makes it everyone's, `--clear` goes ba...
+- `esteem pm notifications list` r: Your notifications, newest first: assignments and mentions
+- `esteem pm notifications read` w: Mark notifications read: ids, or --all
+- `esteem pm notifications unread` r: The number of unread notifications (the bell's badge)
+- `esteem pm health` r: The Health report of a week: your projects by company, why each asks for attention, who has not post...

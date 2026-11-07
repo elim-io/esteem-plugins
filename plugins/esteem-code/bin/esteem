@@ -1,0 +1,20 @@
+#!/bin/sh
+# The esteem CLI for Claude Code (macOS, Linux, Git Bash on Windows): runs the installed binary, and
+# installs it on first use with the published installer, which verifies its SHA-256; only its errors
+# reach the caller. A plugin's bin/ comes after the person's own PATH, so an esteem already installed
+# there runs without this file.
+set -eu
+host="${ESTEEM_DIST_HOST:-https://cli.esteem.team}"
+case "$(uname -s)" in
+  MINGW*|MSYS*|CYGWIN*)
+    dir="${ESTEEM_INSTALL_DIR:-${LOCALAPPDATA:-$HOME/AppData/Local}/Programs/esteem}"
+    exe="$dir/esteem.exe"
+    [ -x "$exe" ] || powershell.exe -NoProfile -ExecutionPolicy Bypass -Command "irm $host/install.ps1 | iex" >/dev/null
+    ;;
+  *)
+    dir="${ESTEEM_INSTALL_DIR:-$HOME/.local/bin}"
+    exe="$dir/esteem"
+    [ -x "$exe" ] || curl -fsSL "$host/install.sh" | ESTEEM_INSTALL_DIR="$dir" sh >/dev/null
+    ;;
+esac
+exec "$exe" "$@"

@@ -1,0 +1,70 @@
+# esteem: apps
+
+Generated from the CLI by `cargo run --example skill`; edit the CLI's help, never this file. `r` reads, `w` writes (`--dry-run`, then run it once the person agrees); `disk` needs a local file, `machine` the person's own machine. Flags: `esteem <command> --schema`.
+
+- `esteem apps list` r: Every service on this server and whether you work through it. The same as bare `esteem apps`
+- `esteem apps show` r: One service: its connection, scopes and limits
+- `esteem apps connect` r: The link that connects a service; open it in a browser
+- `esteem apps disconnect` w: Take a connection away: out of use at once, revoked at the provider
+- `esteem apps read` r: Reads from a service, in parallel on the server; the same REQUEST as `call`. A write is refused: it ...
+- `esteem apps call` w: Requests to a service, in parallel on the server. REQUEST: `conversations.history channel=C1 limit=5...
+- `esteem apps resolve` r: Which service a link belongs to, and the link to connect it when it is not connected
+- `esteem slack whoami` r: Who the connection belongs to, which workspace, the time zone used for output
+- `esteem slack read` r: Channel history, or a whole thread when given a message URL or CHANNEL/TS
+- `esteem slack info` r: A channel's topic, purpose, creator, members, canvases, pinned messages and bookmarks
+- `esteem slack search` r: Search messages, Slack syntax: in:#chan from:@user after:2026-10-01 has:link "exact phrase"
+- `esteem slack channels` r: Conversations you are in (substring filter); --all lists every public and private channel
+- `esteem slack members` r: Who is in a channel
+- `esteem slack users` r: People: id, @handle, name, title, email (substring filter)
+- `esteem slack file` r: Download a file (F… id or file URL) and print its local path; a canvas is saved as text
+- `esteem slack send` w: Post as you. TARGET: #chan, @user (DM), message URL or CHANNEL/TS (= reply in its thread). TEXT: wor...
+- `esteem slack upload` w machine: Upload files as you, in one message. TARGET as `send`: #chan, @user, @me (your own DM), a message UR...
+- `esteem slack edit` w: Replace the text of your message (URL or CHANNEL/TS)
+- `esteem slack react` w: Add a reaction (URL or CHANNEL/TS, emoji name like eyes or white_check_mark)
+- `esteem slack api` w: Any Web API method with key=value params, prints JSON: api pins.list channel=C123
+- `esteem notion get` r: A page as Markdown (row properties on top); a database as schema, views and rows
+- `esteem notion find` r: Title search across the workspace: kind, id, title, last edited
+- `esteem notion pull` r machine: Page as editable Notion Markdown with a header; saves a backup. Then push the edited text
+- `esteem notion push` w machine: Edited text (file or -) back to the page as minimal edits; local ![](path) images get uploaded
+- `esteem notion shot` r machine: Screenshot the page in your own browser through `er` (the ELIM box's toolkit); prints the image path...
+- `esteem notion query` r: Rows as TSV (or --csv/--json). Conditions: Prop=v Prop!=v Prop~text Prop>n Prop<n Prop? Prop!? (a|b ...
+- `esteem notion board` r machine: Every row with its content, comments and images, into one file to Read (review boards)
+- `esteem notion schema` r: Columns: name, type, options
+- `esteem notion set` w: Set properties: Status=Done "Tags=a,b" Due=2026-10-20 Owner= (empty clears)
+- `esteem notion new` w: New page under a page, or new row in a database
+- `esteem notion prop` w: Add or change a column (`select=A,B:green`, `number=dollar`, `relation=<db>`, `text`, `date`...), re...
+- `esteem notion newdb` w: New database on a page: columns as Name:type (`Status:select=Todo,Done`)
+- `esteem notion views` r: Views of a database: id, type, name
+- `esteem notion view` w: Create a view (or change one with `--update <view id>`)
+- `esteem notion comments` r: Page comments: time, author, text, discussion id
+- `esteem notion comment` w: Comment on a page (text, @file or -); `--reply <discussion id>` answers in a thread
+- `esteem notion append` w: Add Markdown at the end of a page (text, @file or -)
+- `esteem notion attach` w machine: Upload files into a page: at the end, or after the block containing --after text
+- `esteem notion files` r machine: Download every file and image of a page; prints the paths
+- `esteem notion mv` w: Move a page under another page or into a database
+- `esteem notion trash` w: Move a page to Notion's trash
+- `esteem notion me` r: Who the connection is
+- `esteem notion api` w: Any API call: api GET pages/<id> · api PATCH blocks/<id> '{json}' · @file or - for the body
+- `esteem google find` r: Find Sheets/Docs in Drive by name → id, kind, name, url
+- `esteem google sheets tabs` r: List tabs → gid, title, rows x cols
+- `esteem google sheets read` r: Read a range (e.g. "Sheet1!A1:D") as TSV
+- `esteem google sheets write` w: Overwrite a range. VALUES = TSV, JSON 2D array, @file or `-` (stdin)
+- `esteem google sheets append` w: Append rows after a table. VALUES like `write`
+- `esteem google sheets clear` w: Clear values in a range
+- `esteem google sheets formula` w: Set one cell to a formula/value, e.g. cell="Sheet1!B2" formula="=SUM(A1:A9)"
+- `esteem google sheets create` w: Create a new spreadsheet
+- `esteem google sheets add-tab` w: Add a tab/sheet
+- `esteem google sheets batch` w: Raw spreadsheets.batchUpdate (REQUESTS = JSON array/body, @file or `-`)
+- `esteem google docs read` r: Read document text (or full JSON with --json)
+- `esteem google docs append` w: Append text to the end. TEXT = literal, @file or `-`
+- `esteem google docs replace` w: Replace all occurrences of FIND with REPLACEMENT
+- `esteem google docs import` w disk: Import a Markdown file as a new Google Doc (Drive converts it). PATH or `-`
+- `esteem google docs update` w disk: Rewrite an existing doc entirely from a Markdown file (same id/URL). PATH or `-`
+- `esteem google docs clear` w: Empty the document body (delete all content)
+- `esteem google docs create` w: Create a new document
+- `esteem google docs batch` w: Raw documents.batchUpdate (REQUESTS = JSON array/body, @file or `-`)
+- `esteem google drive find` r: Find files by name (same as top-level `find`)
+- `esteem google drive share` w: Grant access. Scope flags: --user (private), --domain (org), --anyone (all)
+- `esteem google drive ls` r: List a folder (id or folder URL) → id, kind, name, url; folders first
+- `esteem google drive perms` r: List who has access → permId, type, role, who
+- `esteem google drive rm` w: Delete a file: default trashes it; --hard deletes permanently

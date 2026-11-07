@@ -1,0 +1,98 @@
+# esteem: finance
+
+Generated from the CLI by `cargo run --example skill`; edit the CLI's help, never this file. `r` reads, `w` writes (`--dry-run`, then `--yes` once the person agrees); `disk` needs a local file, `machine` the person's own machine. Flags: `esteem <command> --schema`.
+
+- `esteem finance directory` r: Every Finance directory in one call: id + name for bank accounts, counterparties, category groups + ...
+- `esteem finance report month` r: The closed-month report: figures on stdout, the readiness gate on stderr, a NON-ZERO exit when a che...
+- `esteem finance report check` r: ONE readiness check, with the RECORDS behind it — the audit loop's own command. Give it check codes ...
+- `esteem transactions list` r: List transactions with optional filters
+- `esteem transactions facets` r: Distinct filter values present in the scoped set (for populating filters)
+- `esteem transactions get` r: Get one transaction by id
+- `esteem transactions create` w: Record one actual payment
+- `esteem transactions apply` w disk: Apply an edited `transactions list` TSV: update changed rows, create id-less ones
+- `esteem transactions update` w: Update fields on one transaction (requires --yes/--confirm)
+- `esteem transactions trash` w: Move one transaction to the trash (reversible; refuses while matched — see --unlink-matches)
+- `esteem transactions restore` w: Restore a trashed transaction (the record only — matches do not come back)
+- `esteem transactions purge` w: Permanently purge one trashed transaction (hard delete)
+- `esteem transactions transfer create` w: Create an internal transfer (outflow on --from + inflow on --to)
+- `esteem transactions transfer split` w: Detach a transfer pair into two independent transactions
+- `esteem transactions transfer merge` w: Link two existing opposite-direction transactions into a transfer
+- `esteem transactions match` w: Replace a transaction's obligation-line matches (--alloc set)
+- `esteem transactions unmatch` w: Clear all of a transaction's matches
+- `esteem obligations list` r: List obligations with optional filters
+- `esteem obligations facets` r: Distinct filter values present in the scoped set
+- `esteem obligations get` r: Get one obligation by id (with its lines + paid_amount)
+- `esteem obligations create` w: Create a planned payment (one or more --line)
+- `esteem obligations update` w: Update one obligation (scalars + optional --replace-lines)
+- `esteem obligations duplicate` w: Copy an obligation into a fresh unpaid one
+- `esteem obligations trash` w: Move one obligation to the trash (reversible; refuses while matched — see --unlink-matches)
+- `esteem obligations restore` w: Restore a trashed obligation (the record only — matches do not come back)
+- `esteem obligations purge` w: Permanently purge one trashed obligation (hard cascade)
+- `esteem obligations refund apply` w: Apply a refund obligation against the obligation it refunds
+- `esteem obligations refund remove` w: Clear a refund's application (the repair path)
+- `esteem matching get` r: Show a transaction's matches + residual (amount − matched)
+- `esteem matching set` w: Replace a transaction's whole match set (--alloc line=amount[:notes])
+- `esteem matching add` w: Allocate one obligation line onto a transaction (partial ok)
+- `esteem matching remove` w: Drop one allocation (by --line or --match id)
+- `esteem matching clear` w: Clear all of a transaction's matches
+- `esteem cashflow pivot` r: The cashflow pivot: by week, month, quarter or year and any grouping; obligations, transactions, FX
+- `esteem cashflow cell` r: Drill one pivot cell down to its obligations
+- `esteem cashflow freecash` r: Free cash per account + projection
+- `esteem cashflow facets` r: Distinct filter values present in the scoped data
+- `esteem cashflow views list` r: List saved views
+- `esteem cashflow views create` w: Create a saved view
+- `esteem cashflow views update` w: Update a saved view
+- `esteem cashflow views delete` w: Delete a saved view
+- `esteem cashflow views reorder` w: Reorder saved views (every id, once, in the desired order)
+- `esteem counterparties list` r: List counterparties with optional filters
+- `esteem counterparties facets` r: Types present in the scoped set (for the filter dropdown)
+- `esteem counterparties get` r: Get one counterparty (optionally with --stats)
+- `esteem counterparties create` w: Create a counterparty
+- `esteem counterparties update` w: Update a counterparty
+- `esteem counterparties apply` w disk: Apply an edited `counterparties list` TSV: update changed rows, create id-less ones
+- `esteem counterparties close` w: Close a counterparty: retire it from new use, reversible with `reopen`; it keeps every transaction, ...
+- `esteem counterparties reopen` w: Reopen a closed counterparty. Alias: `restore`
+- `esteem counterparties delete` w: Delete a counterparty for good — refused while any transaction or obligation points at it; no reassi...
+- `esteem counterparties stats` r: Per-counterparty stats (inflow/outflow/monthly avg/tx)
+- `esteem counterparties ledger` r: The counterparty-scoped cashflow ledger
+- `esteem counterparties types get` r: Read the counterparty-type config
+- `esteem counterparties types set` w disk: Replace the whole config from a TOML file
+- `esteem categories list` r: List categories (--groups for the category-group table instead)
+- `esteem categories apply` w disk: Apply an edited `categories list` TSV: update changed rows, create id-less ones
+- `esteem categories create-group` w: Create a category group
+- `esteem categories update-group` w: Update a category group
+- `esteem categories trash-group` w: Delete a category group — refused while it still holds live categories (no cascade)
+- `esteem categories restore-group` w: Restore a deleted category group (its deleted categories stay deleted)
+- `esteem categories reorder-groups` w: Put the category groups in this order (the Categories page and the pickers follow)
+- `esteem categories reorder` w: Put a group's categories in this order: `reorder --group <id> <ids...> --yes`
+- `esteem categories create-category` w: Create a category
+- `esteem categories update-category` w: Update a category
+- `esteem categories move-category` w: Move a category to another group (reparent)
+- `esteem categories trash-category` w: Delete a category — refused while obligation lines point at it; see --reassign-to
+- `esteem categories restore-category` w: Restore a deleted category (its group must be live)
+- `esteem accounts list` r: List bank accounts (filter with --entity)
+- `esteem accounts get` r: Get one bank account
+- `esteem accounts create` w: Create a bank account (finance-admin)
+- `esteem accounts update` w: Update a bank account, incl. the OPEN/CLOSED status column via --status (finance-admin)
+- `esteem accounts close` w: Close a bank account: retire it from new use, reversible with `reopen`; it stays on every transactio...
+- `esteem accounts reopen` w: Reopen a closed bank account (finance-admin). Alias: `restore`
+- `esteem accounts delete` w: Delete a bank account for good — refused while ANYTHING references it, and refused again while it st...
+- `esteem accounts balances` r: Per-account native-currency balances (closed hidden, as in `list`)
+- `esteem dashboard get` r: Get the finance dashboard aggregate
+- `esteem currencies config` r: Show the currency config (base + enabled + last fetch)
+- `esteem currencies coverage` r: Per-target rate coverage (earliest/latest/count)
+- `esteem currencies rates` r: Convert `--pair <from>:<date>` into `--to`
+- `esteem currencies refresh` w: Pull latest rates from Frankfurter (finance-admin)
+- `esteem currencies backfill` w: Backfill per-date history for a range (finance-admin)
+- `esteem currencies enable` w: Enable a currency (finance-admin)
+- `esteem currencies disable` w: Disable a currency (finance-admin)
+- `esteem currencies base` w: Set the base currency (finance-admin)
+- `esteem currencies set-rate` w: Set a manual rate override (finance-admin)
+- `esteem entities list` r: List finance entities
+- `esteem entities get` r: Get one finance entity by id
+- `esteem entities create` w: Create a finance entity (finance-admin)
+- `esteem entities update` w: Update a finance entity (finance-admin)
+- `esteem entities close` w: Close a finance entity: retire it from new use, reversible with `reopen`; its accounts, companies an...
+- `esteem entities reopen` w: Reopen a closed finance entity (finance-admin). Alias: `restore`
+- `esteem entities delete` w: Delete a finance entity for good — refused while any bank account, company or estimate points at it;...
+- `esteem entities set-default` w: Make this entity the org's single default (finance-admin)

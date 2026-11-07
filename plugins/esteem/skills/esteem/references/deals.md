@@ -1,0 +1,201 @@
+# esteem: deals
+
+Generated from the CLI by `cargo run --example skill`; edit the CLI's help, never this file. `r` reads, `w` writes (`--dry-run`, then `--yes` once the person agrees); `disk` needs a local file, `machine` the person's own machine. Flags: `esteem <command> --schema`.
+
+- `esteem estimates list` r: List estimates with optional filters
+- `esteem estimates get` r: Get one estimate's header, notes, and graph-size summary
+- `esteem estimates create` w: Create a new estimate (v1, draft) for a company
+- `esteem estimates build` w disk: Build the resource pool + task groups + templates from one TOML spec in a single call — the fast pat...
+- `esteem estimates edit` w disk: Edit an EXISTING estimate from one TOML patch — resources/periods/ stages/plan/cells upserted by hum...
+- `esteem estimates snapshot` r: Dump the whole editable state as ONE round-trippable TOML — edit it locally, then `apply` (ADR-0309)
+- `esteem estimates apply` w disk: Desired state: diff an edited snapshot against the live estimate and execute only the changes (rows ...
+- `esteem estimates update` w: Update header fields (name, company, legal entity, currency, tax, discount, locale)
+- `esteem estimates status` w: Set the status of one or many estimates (`--to` a status or a kind)
+- `esteem estimates statuses list` r: List the statuses in order, with their kind and how many estimates are on each
+- `esteem estimates statuses add` w: Add a status of a kind
+- `esteem estimates statuses rename` w: Rename a status
+- `esteem estimates statuses color` w: Change a status's colour (one of the stage palette)
+- `esteem estimates statuses kind` w: Change what a status means; the last of its kind cannot change
+- `esteem estimates statuses rm` w: Remove a status, moving its estimates to another first
+- `esteem estimates statuses reorder` w: Put the given statuses first, in this order; the rest follow as they were
+- `esteem estimates archive` w: Archive an estimate (reversible)
+- `esteem estimates restore` w: Restore a previously archived estimate
+- `esteem estimates delete` w: Move an estimate to the trash (reversible for 30 days — see `trash`); `archive` is the lifecycle and...
+- `esteem estimates trash list` r: The estimates in the trash
+- `esteem estimates trash restore` w: Take an estimate out of the trash, as it was (archived stays archived)
+- `esteem estimates trash purge` w: Permanently delete a trashed estimate with its plan, pool, exports and events (NOT reversible)
+- `esteem estimates duplicate` w: Duplicate into a standalone copy (its own chain) — `versions create` is the same-lineage branch inst...
+- `esteem estimates notes get` r: Read both notes fields
+- `esteem estimates notes set` w: Set one or both notes fields
+- `esteem estimates brief get` r: Read the estimate's brief answers (question key -> answer)
+- `esteem estimates brief set` w: Set brief answers by question key (merges over the current set)
+- `esteem estimates brief config get` r: Read the org's question set
+- `esteem estimates brief config set` w disk: Replace the org's ENTIRE question set from a TOML/JSON file
+- `esteem estimates resources list` r: List the estimate's resource pool with live Qnt/Cost/Margin/Profit
+- `esteem estimates resources add` w: Add a new resource to the pool
+- `esteem estimates resources update` w: Update name/category/rate/internal rate, or link/unlink/re-link a catalog role
+- `esteem estimates resources remove` w: Remove a resource from the pool (refuses if it has live allocations)
+- `esteem estimates periods list` r: List an estimate's periods in order
+- `esteem estimates periods create` w: Add a period (a column on the Plan/Allocation grid)
+- `esteem estimates periods update` w: Rename or re-date an existing period
+- `esteem estimates periods delete` w: Delete a period, moving its allocation cells to another one (--move-to) or deleting them with it (--...
+- `esteem estimates periods reorder` w: Set the display order of every period on an estimate in one call
+- `esteem estimates stages list` r: List an estimate's stages in order
+- `esteem estimates stages create` w: Add a stage (project phase)
+- `esteem estimates stages update` w: Rename an existing stage
+- `esteem estimates stages delete` w: Delete a stage (plan lines in it become stage-less, not deleted)
+- `esteem estimates stages reorder` w: Set the display order of every stage on an estimate in one call
+- `esteem estimates plan list` r: List an estimate's plan lines, in order
+- `esteem estimates plan create` w: Add a task-group row (catalog-linked, recommended — or free-text)
+- `esteem estimates plan update` w: Edit a plan line's fields
+- `esteem estimates plan delete` w: Delete a plan line (drops its allocation lines with it)
+- `esteem estimates plan reorder` w: Set the display order of every plan line on an estimate in one call
+- `esteem estimates plan refresh` w: Re-copy the task-group code/name from a linked plan line's catalog item
+- `esteem estimates plan set-periods` w: Mark which periods a plan line is "active" in (Roadmap display only)
+- `esteem estimates plan apply-template` w: Apply a service template's whole role composition to a plan line — replaces existing allocations, au...
+- `esteem estimates allocation list` r: List allocation lines, optionally filtered by plan line/period/role
+- `esteem estimates allocation set` w: Upsert (plan line, role, period) cells — the recommended command; `--file cells.toml` batches many c...
+- `esteem estimates allocation create` w: Raw: create an allocation line with every field explicit
+- `esteem estimates allocation update` w: Raw: patch an existing allocation line
+- `esteem estimates allocation delete` w: Delete one or more allocation lines (many ids = one connection)
+- `esteem estimates allocation reorder` w: Set the display order of every allocation line on an estimate in one call
+- `esteem estimates versions list` r: List every version in this estimate's lineage
+- `esteem estimates versions create` w: Branch a new version off an existing one; it becomes the current version
+- `esteem estimates versions current` w: Make this version the current one of its chain
+- `esteem estimates versions rename` w: Name a version ("" clears)
+- `esteem estimates export list` r: List an estimate's saved export configurations
+- `esteem estimates export create` w: Create a new export configuration
+- `esteem estimates export update` w: Edit an export's name and/or config (config flags merge onto the existing one)
+- `esteem estimates export delete` w: Delete an export configuration
+- `esteem estimates export download` r: Generate and download the PDF to a local file
+- `esteem estimates export link` r: Get a short-lived signed URL to download the PDF in a browser (no login)
+- `esteem estimates events list` r: List the estimate's events, newest first
+- `esteem estimates legal-entities list` r: List the org's invoicing/legal entities
+- `esteem estimates legal-entities get` r: Get one invoicing entity by id (omit the id for the org's default)
+- `esteem estimates summary` r: Quick stats + validation — is this estimate correctly filled in
+- `esteem estimates validate` r: Validation only — the full rule report with fix hints; exits non-zero on errors so scripted/agent fl...
+- `esteem leads list` r: List leads with optional filters
+- `esteem leads get` r: Get one lead plus its linked estimates
+- `esteem leads create` w: Create a new lead
+- `esteem leads update` w: Update fields on one lead — including moving its pipeline stage
+- `esteem leads apply` w disk: Apply an edited `leads list` TSV: update changed rows, create id-less ones
+- `esteem leads archive` w: Archive a lead (reversible)
+- `esteem leads restore` w: Restore a previously archived lead
+- `esteem leads delete` w: Move a lead to the trash (reversible for 30 days — see `trash`); stages and `archive` are the lifecy...
+- `esteem leads trash list` r: The leads in the trash
+- `esteem leads trash restore` w: Take a lead out of the trash, with its tasks, people and activity
+- `esteem leads trash purge` w: Permanently delete a trashed lead with its tasks and activity (NOT reversible); refused while an est...
+- `esteem leads merge` w: Merge a duplicate lead into a primary (the duplicate is archived)
+- `esteem leads report` r: The funnel: conversion between stages, deals in work, and aging
+- `esteem leads stages list` r: List the org's lead stages in pipeline order
+- `esteem leads stages create` w: Add a stage
+- `esteem leads stages update` w: Rename a stage and/or change its color
+- `esteem leads stages delete` w: Delete a stage, moving its leads (archived too) to --move-to first
+- `esteem leads stages reorder` w: Set the pipeline order of every stage in one call
+- `esteem leads sources list` r: List the org's values in configured order
+- `esteem leads sources create` w: Add a value
+- `esteem leads sources update` w: Rename a value
+- `esteem leads sources delete` w: Delete a value: its leads move to --move-to, or lose the value without it
+- `esteem leads sources reorder` w: Set the order of every value in one call
+- `esteem leads reasons list` r: List the org's values in configured order
+- `esteem leads reasons create` w: Add a value
+- `esteem leads reasons update` w: Rename a value
+- `esteem leads reasons delete` w: Delete a value: its leads move to --move-to, or lose the value without it
+- `esteem leads reasons reorder` w: Set the order of every value in one call
+- `esteem leads options list` r: List the org's values in configured order
+- `esteem leads options create` w: Add a value
+- `esteem leads options update` w: Rename a value
+- `esteem leads options delete` w: Delete a value: its leads move to --move-to, or lose the value without it
+- `esteem leads options reorder` w: Set the order of every value in one call
+- `esteem leads fields list` r: The custom fields in order, then which built-in fields the card hides
+- `esteem leads fields add` w: Add a custom field of a type (text | number | date)
+- `esteem leads fields rename` w: Rename a custom field
+- `esteem leads fields remove` w: Remove a custom field and every lead's value of it
+- `esteem leads fields reorder` w: Put the given custom fields first, in this order; the rest follow as they were
+- `esteem leads fields show` w: Show built-in card fields again (stage, responsible, source, expectedClose, company, tags, lossReaso...
+- `esteem leads fields hide` w: Hide built-in card fields from the lead card
+- `esteem leads tasks list` r: List one lead's reminders (open first, then completed)
+- `esteem leads tasks create` w: Add a reminder to a lead
+- `esteem leads tasks get` r: One reminder with the lead it sits on, whoever it is assigned to
+- `esteem leads tasks update` w: Edit a reminder, tick it off, or move it to another lead (--lead)
+- `esteem leads tasks delete` w: Delete a reminder
+- `esteem leads tasks mine` r: Every reminder assigned to YOU, across leads — the "what is due" slice
+- `esteem leads contacts list` r: List the people on one lead (primary first)
+- `esteem leads contacts attach` w: Put an existing contact on a lead
+- `esteem leads contacts detach` w: Take a contact off a lead (the person survives — they may be on other deals)
+- `esteem leads contacts set-primary` w: Make one of a lead's contacts its primary — the one the deal's quick fields show
+- `esteem leads events list` r: List a lead's activity feed
+- `esteem leads events add` w: Add a manual note to a lead's feed
+- `esteem leads events edit` w: Rewrite the text of one of YOUR notes
+- `esteem leads events rm` w: Delete a note: your own, or any as an Owner/Admin
+- `esteem leads meetings add` w disk: Record a meeting summary in a lead's feed, with optional files attached
+- `esteem leads attachments list` r: List the files attached to a lead
+- `esteem leads attachments download` r: Download one attachment to disk
+- `esteem leads attachments delete` w: Delete an attachment — the row AND the stored file
+- `esteem contacts list` r: List the org's people with optional search
+- `esteem contacts get` r: Get one contact plus every lead they are on
+- `esteem contacts create` w: Create a person (does NOT put them on a deal — see `leads contacts attach`)
+- `esteem contacts update` w: Update a person's fields (empty string clears, except --name)
+- `esteem contacts delete` w: Permanently delete a person — refused while they are still on a lead
+- `esteem contacts merge` w: Fold a duplicate person into another; the duplicate's lead links move first
+- `esteem companies list` r: List companies with optional search; with Finance, each row's INCOME / EXPENSE / NET - the money of ...
+- `esteem companies get` r: Get one company by `cmp_` id, by `#handle`, or by alias otherwise
+- `esteem companies create` w: Create a new company (requires --yes/--confirm)
+- `esteem companies update` w: Update alias/email/country/currency on one company (requires --yes/--confirm)
+- `esteem companies close` w: Close a company: retire it from new use, reversible with `reopen`; it keeps every project, estimate,...
+- `esteem companies reopen` w: Reopen a closed company. Alias: `restore`
+- `esteem companies delete` w: Delete a company for good — refused while any project, counterparty, contact, lead or estimate point...
+- `esteem companies handle` w: Rename the company's handle (its primary prefix): every project handle under it is rewritten, the ol...
+- `esteem companies look` w: Set the company's mark: --color, --icon, `--avatar <file>` or --no-avatar
+- `esteem companies internal` w: Mark the company internal (`on`: the studio's own direction - operations, dividends, transfers - lis...
+- `esteem companies options list` r: The list, in order
+- `esteem companies options add` w: Add an option at the end (needs the full Directory)
+- `esteem companies options rename` w: Rename an option (Owner/Admin)
+- `esteem companies options rm` w: Delete an option; its companies move to --move-to or lose the field (Owner/Admin)
+- `esteem companies options order` w: Set the order: every option of the list exactly once (Owner/Admin)
+- `esteem companies activity` r: The company's history newest first (its leads, estimates, projects, money and calls, each under your...
+- `esteem companies money` r: The company's money: payments on lines whose project is the company's, whoever the counterparty - in...
+- `esteem projects list` r: List projects, optionally scoped to one company
+- `esteem projects get` r: Get one project by `prj_` id
+- `esteem projects create` w: Create a new project (requires --yes/--confirm)
+- `esteem projects update` w: Update one project — PATCH, only the flags you pass change; "" clears
+- `esteem projects apply` w disk: Apply an edited `projects list` TSV: update changed rows, create id-less ones
+- `esteem projects trash` w: Move a project to the trash (reversible) — refused while obligation lines point at it
+- `esteem projects restore` w: Restore a deleted project and what its trash took (member grants do NOT come back)
+- `esteem projects delete` w: Permanently delete a trashed project (NOT reversible — see `trash` instead)
+- `esteem resources list` r: List catalog resources with optional filters
+- `esteem resources get` r: Get one resource by id
+- `esteem resources create` w: Create a new catalog resource
+- `esteem resources update` w: Update code/name/category/rates/description
+- `esteem resources archive` w: Archive a resource (soft-delete)
+- `esteem resources restore` w: Restore a previously archived resource
+- `esteem resources delete` w: Move a resource to the trash (see `trash`); estimate resource pools linking it keep their name and r...
+- `esteem resources trash list` r: What is in the resources' trash: categories, and the roles trashed on their own
+- `esteem resources trash restore` w: Take a role (`prd_`) or a category (`pf_`, with the roles trashed with it) out of the trash; pool li...
+- `esteem resources trash purge` w: Permanently delete a trashed role or category (with its roles) - NOT reversible; refused while a pro...
+- `esteem resources categories list` r: List every category
+- `esteem resources categories create` w: Create a new category
+- `esteem resources categories update` w: Update a category's name/color
+- `esteem resources categories delete` w: Move a category and its resources to the trash (`esteem resources trash`); estimate resource pools l...
+- `esteem resources export` r: Export the whole catalog to TOML
+- `esteem resources import` w disk: Import/upsert resources from a TOML file (by `code`)
+- `esteem services list` r: List catalog groups/services, compact (no nested template detail)
+- `esteem services show` r: One item's full detail — every template, every template's role lines
+- `esteem services create-item` w: Add a group (category) or leaf service
+- `esteem services update-item` w: Edit a group/service's parent, track, phase, code, or name
+- `esteem services archive-item` w: Archive a group/service (soft-delete)
+- `esteem services restore-item` w: Restore a previously archived group/service
+- `esteem services delete-item` w: Move a group/service and its templates to the trash (see `trash`); plan lines linking it keep their ...
+- `esteem services reorder-items` w: Set the display order of sibling groups/services in one call
+- `esteem services create-template` w: Add a service variant (Basic/Pro/Max) with its role composition
+- `esteem services update-template` w: Edit a template's fields and/or replace its whole role set
+- `esteem services delete-template` w: Move a template to the trash (reversible for 30 days — see `trash`)
+- `esteem services trash list` r: What is in the catalog's trash
+- `esteem services trash restore` w: Take a service or group (`ci_`) or a template (`ctpl_`) out of the trash, with what went with it; pl...
+- `esteem services trash purge` w: Permanently delete a trashed service, group (with its services) or template (NOT reversible)
+- `esteem catalog tracks list` r: The tracks in order, with their key and how many catalog items are on each
+- `esteem catalog tracks add` w: Add a track
+- `esteem catalog tracks rename` w: Rename a track (its key stays)
+- `esteem catalog tracks color` w: Change a track's colour (one of the calendar's twelve)
+- `esteem catalog tracks rm` w: Remove a track, moving its items to another first
+- `esteem catalog tracks reorder` w: Put the given tracks first, in this order; the rest follow as they were

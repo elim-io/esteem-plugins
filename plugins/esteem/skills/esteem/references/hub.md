@@ -1,0 +1,64 @@
+# esteem: hub
+
+Generated from the CLI by `cargo run --example skill`; edit the CLI's help, never this file. `r` reads, `w` writes (`--dry-run`, then `--yes` once the person agrees); `disk` needs a local file, `machine` the person's own machine. Flags: `esteem <command> --schema`.
+
+- `esteem home` r: Home (`HomeService.GetHome`): the four figures of a period and the four short lists - money, my task...
+- `esteem members list` r: List members: who they are, what their role bypasses, and what they can reach
+- `esteem members get` r: Get one member by user id, with every per-resource grant
+- `esteem members whoami` r: Show the member this CLI is logged in as (needs no admin right)
+- `esteem members invite` w: Invite somebody to the org (requires --yes/--confirm)
+- `esteem members invites list` r: List invites
+- `esteem members invites resend` w: Reissue an invite — mints a NEW token and invalidates the old link
+- `esteem members invites revoke` w: Revoke an invite — the existing link stops working immediately
+- `esteem members role` w: Change somebody's role (requires --yes/--confirm)
+- `esteem members access` w: Set the access config — read-modify-write, only the flags you pass change (requires --yes/--confirm)
+- `esteem members accounts` w: Replace the member's bank-account grant (requires --yes/--confirm)
+- `esteem members entities` w: Replace the member's legal-entity grant (requires --yes/--confirm)
+- `esteem members companies` w: Replace the member's company grant (requires --yes/--confirm)
+- `esteem members remove` w: Remove a member from the org (requires --yes/--confirm)
+- `esteem members restore` w: Restore a previously removed member (requires --yes/--confirm)
+- `esteem members avatar set` w disk: Set a member's photo from a file (requires --yes/--confirm)
+- `esteem members avatar clear` w: Take a member's photo off - they are shown by their initials (requires --yes/--confirm)
+- `esteem profile get` r: Who you are in this organization and your time zone
+- `esteem profile set` w: Set your time zone (IANA: Europe/Moscow); `--timezone ''` goes back to the organization's (requires ...
+- `esteem profile avatar set` w disk: Upload a picture as your photo: PNG, JPEG, WebP or GIF up to 5 MB; the server keeps the centre squar...
+- `esteem profile avatar clear` w: Take your photo off - you are shown by your initials, and the Google import does not put one back (r...
+- `esteem hub posts list` r: Pinned posts first, then newest first by key; the channels with their counts on stderr
+- `esteem hub posts edit` w: Edit your post: only what you pass changes
+- `esteem hub posts delete` w: Delete a post: it leaves the feed, `restore` brings it back within 30 days
+- `esteem hub posts restore` w: Bring a deleted post back
+- `esteem hub post` w: Write a post in a channel: Markdown from --body or --file, images from --image (eac...
+- `esteem hub comments list` r: A post's comments, oldest first
+- `esteem hub comments delete` w: Delete a comment - yours, or any as an Owner or an Admin
+- `esteem hub comment` w: Comment on a post
+- `esteem hub react` w: Your reaction on a post, on or --off
+- `esteem hub pin` w: Pin a post on top of the feed, or --off - an Owner or an Admin
+- `esteem kb list` r: Articles newest edit first: the published ones and the drafts you may read
+- `esteem kb get` r: An article's Markdown on stdout (`> a.md`), what it is on stderr; --json for all of it
+- `esteem kb create` w: A new draft of yours in a collection
+- `esteem kb edit` w: Change an article - yours, or any as an editor: only what you pass changes
+- `esteem kb move` w: Move an article to another collection
+- `esteem kb publish` w: Publish a draft: every member with the Hub reads it
+- `esteem kb unpublish` w: Back to a draft
+- `esteem kb duplicate` w: A draft copy of yours in the same collection, cover included
+- `esteem kb delete` w: Delete an article: `restore` brings it back within 30 days
+- `esteem kb restore` w: Bring a deleted article back
+- `esteem kb history` r: Who did what to an article, newest first
+- `esteem kb bulk` w: One action over many articles, all or none; prints the command that undoes it
+- `esteem kb collections list` r: Every collection with its published and draft counts
+- `esteem kb collections create` w: A new collection
+- `esteem kb collections rename` w: Rename it or change its icon
+- `esteem kb collections delete` w: Delete an empty collection; its articles in the trash go with it
+- `esteem org chart` r: The chart: every active member with their team, who they report to (and why), their title, the peopl...
+- `esteem org teams list` r: Teams in creation order with their lead and size
+- `esteem org teams create` w: A new team; the lead joins it
+- `esteem org teams update` w: Rename a team or change its lead; a new lead joins it
+- `esteem org teams delete` w: Delete a team: its people stay, teamless
+- `esteem org place` w: Place a member: their team, who they report to, their title - only what you pass changes (an Owner o...
+- `esteem org suggest` r: The first structure drafted from where each person's confirmed hours went; writes nothing (an Owner ...
+- `esteem org terms list` r: A member's terms, newest first
+- `esteem org terms add` w: A new term for a member
+- `esteem org terms set` w: Change a term - only what you pass changes
+- `esteem org terms delete` w: Delete a term for good
+- `esteem org settings get` r: The organization's name, address and date format
+- `esteem org settings set` w: Set the date format (an Owner or an Admin; requires --yes). Until it is set, the format follows the ...

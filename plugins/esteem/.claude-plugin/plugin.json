@@ -1,0 +1,14 @@
+{
+  "name": "esteem",
+  "displayName": "Esteem",
+  "version": "0.1.0",
+  "description": "The studio's projects, tasks, deals, finance, meetings and hub in Esteem: the esteem skill and the Esteem connector. Every surface: Chat, Cowork, Claude Code.",
+  "author": {
+    "name": "ELIM",
+    "url": "https://esteem.team"
+  },
+  "homepage": "https://app.esteem.team",
+  "repository": "https://github.com/elim-io/esteem",
+  "license": "AGPL-3.0-only",
+  "privacyPolicyUrl": "https://esteem.team/privacy"
+}

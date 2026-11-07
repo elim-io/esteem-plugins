@@ -1,0 +1,17 @@
+{
+  "name": "esteem",
+  "owner": { "name": "ELIM", "url": "https://esteem.team" },
+  "description": "Esteem's plugins: esteem (the skill and the connector, every surface) and esteem-code (the CLI, Claude Code only)",
+  "plugins": [
+    {
+      "name": "esteem",
+      "source": "./plugins/esteem",
+      "description": "The esteem skill and the Esteem connector: Chat, Cowork and Claude Code"
+    },
+    {
+      "name": "esteem-code",
+      "source": "./plugins/esteem-code",
+      "description": "The esteem CLI on PATH in Claude Code, installed on first use; needs the esteem plugin"
+    }
+  ]
+}
