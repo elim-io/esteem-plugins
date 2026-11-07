@@ -9,6 +9,5 @@
   },
   "homepage": "https://app.esteem.team",
   "repository": "https://github.com/elim-io/esteem",
-  "license": "AGPL-3.0-only",
-  "privacyPolicyUrl": "https://esteem.team/privacy"
+  "license": "AGPL-3.0-only"
 }

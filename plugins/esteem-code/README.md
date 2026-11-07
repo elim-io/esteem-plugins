@@ -9,9 +9,9 @@ which carries the skill, and installs it with this one.
     /plugin marketplace add elim-io/esteem-plugins
     /plugin install esteem-code@esteem
 
-Install it in Claude Code or the Code tab of Claude Desktop. The first `esteem` command downloads the CLI
-for this machine from cli.esteem.team, checks its SHA-256 and keeps it in ~/.local/bin (Windows:
-%LOCALAPPDATA%\Programs\esteem); later commands run it directly. Sign in once with `esteem auth login`.
+Install it in Claude Code or the Code tab of Claude Desktop. The first session downloads the CLI for this
+machine from cli.esteem.team, checks its SHA-256 and keeps it in ~/.local/bin (Windows:
+%LOCALAPPDATA%\Programs\esteem); later sessions find it there. Sign in once with `esteem auth login`.
 
 ## Data
 

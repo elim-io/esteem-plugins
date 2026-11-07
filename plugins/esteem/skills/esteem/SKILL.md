@@ -1,18 +1,14 @@
 ---
 name: esteem
 description: >-
-  Esteem (app.esteem.team), the studio's platform, through the `esteem` CLI or the Esteem connector's
-  tools: the studio's projects, tasks, time, deals, estimates, finance, meetings, the hub, and the person's own
-  Slack, Notion and Google. (1) A project - "что открыто в проекте", "что по проекту", project status, open
-  tasks, #handle, prj_: enter it the way below. (2) Past calls FIRST - any mention of a call, звонок, созвон,
-  колл, зум, встреча, митинг, планёрка, синк, демо, транскрипт, "что обсуждали", "о чём договорились", "что
-  говорил X", meeting, recording: `esteem meetings` before grepping local notes. (3) Deals - estimates (сметы),
-  leads, clients, catalog, PDFs; Finance, Projects (pm), Hub. (4) The person's Slack, Notion and Google as
-  `esteem slack|notion|google` - a Slack channel or thread by link, search, post/reply/react; a Notion page
-  with subpages, databases, properties, comments, pull/push re-layout; Google Sheets, Docs, Drive. Triggers -
-  смета, лид, клиент, проект, задачи, слак, slack, *.slack.com/archives link, "прочитай тред", "напиши в
-  слак", ноушн, notion.so link, "обнови статус", "переверстай", таблица, гугл док, папка на диске,
-  spreadsheet.
+  Esteem (app.esteem.team), the studio's platform, through the `esteem` CLI or the connector's tools: projects,
+  tasks, time, deals, estimates, finance, meetings, the hub, the person's own Slack, Notion and Google. A project:
+  "что открыто в проекте", "что по проекту", status, open tasks, #handle, prj_. Past calls FIRST: звонок, созвон,
+  колл, зум, встреча, митинг, планёрка, синк, демо, транскрипт, "что обсуждали", "о чём договорились", "что говорил
+  X", meeting, recording - `esteem meetings` before grepping local notes. Deals: смета, лид, клиент, catalog, PDF;
+  Finance, Projects (pm), Hub, задачи. `esteem slack|notion|google`: слак, slack, *.slack.com/archives link,
+  "прочитай тред", "напиши в слак", search, post, react; ноушн, notion.so link, page, database, comments, "обнови
+  статус", "переверстай", pull/push; таблица, гугл док, папка на диске, spreadsheet, Sheets, Docs, Drive.
 ---
 
 # Esteem

@@ -1,0 +1,19 @@
+#!/bin/sh
+# At a session's start in Claude Code (macOS, Linux, Git Bash on Windows): an esteem on the PATH is left alone;
+# otherwise the published installer, which verifies its SHA-256, and the folder on this session's PATH. The hook's
+# one line runs this file through `exec`; PowerShell has no `exec` and goes on to setup.ps1.
+set -eu
+command -v esteem >/dev/null 2>&1 && exit 0
+host="${ESTEEM_DIST_HOST:-https://cli.esteem.team}"
+case "$(uname -s)" in
+  MINGW*|MSYS*|CYGWIN*)
+    dir="${ESTEEM_INSTALL_DIR:-${LOCALAPPDATA:-$HOME/AppData/Local}/Programs/esteem}"
+    [ -x "$dir/esteem.exe" ] || powershell.exe -NoProfile -ExecutionPolicy Bypass -Command "irm $host/install.ps1 | iex" >/dev/null
+    dir="$(cygpath -u "$dir")"
+    ;;
+  *)
+    dir="${ESTEEM_INSTALL_DIR:-$HOME/.local/bin}"
+    [ -x "$dir/esteem" ] || curl -fsSL "$host/install.sh" | ESTEEM_INSTALL_DIR="$dir" sh >/dev/null
+    ;;
+esac
+[ -z "${CLAUDE_ENV_FILE:-}" ] || printf 'export PATH="%s:$PATH"\n' "$dir" >>"$CLAUDE_ENV_FILE"

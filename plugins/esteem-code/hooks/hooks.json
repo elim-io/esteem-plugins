@@ -1,0 +1,15 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "exec sh \"${CLAUDE_PLUGIN_ROOT}/hooks/setup\"; powershell.exe -NoProfile -ExecutionPolicy Bypass -File \"${CLAUDE_PLUGIN_ROOT}/hooks/setup.ps1\"",
+            "timeout": 120
+          }
+        ]
+      }
+    ]
+  }
+}

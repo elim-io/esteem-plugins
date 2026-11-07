@@ -2,7 +2,7 @@
   "name": "esteem-code",
   "displayName": "Esteem for Claude Code",
   "version": "0.1.0",
-  "description": "The esteem CLI on PATH in Claude Code, installed on first use for this machine (macOS, Linux, Windows); the skill comes from the esteem plugin.",
+  "description": "The esteem CLI on PATH in Claude Code, installed at the session's start for this machine (macOS, Linux, Windows); the skill comes from the esteem plugin.",
   "author": {
     "name": "ELIM",
     "url": "https://esteem.team"
@@ -12,6 +12,5 @@
   "license": "AGPL-3.0-only",
   "dependencies": [
     "esteem"
-  ],
-  "privacyPolicyUrl": "https://esteem.team/privacy"
+  ]
 }

@@ -11,7 +11,7 @@
     {
       "name": "esteem-code",
       "source": "./plugins/esteem-code",
-      "description": "The esteem CLI on PATH in Claude Code, installed on first use; needs the esteem plugin"
+      "description": "The esteem CLI on PATH in Claude Code, installed at the session's start; needs the esteem plugin"
     }
   ]
 }
