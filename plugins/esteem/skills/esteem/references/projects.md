@@ -78,7 +78,7 @@ Generated from the CLI by `cargo run --example skill`; edit the CLI's help, neve
 - `esteem pm projects unarchive` w: Bring an archived project back
 - `esteem pm projects history` r: The project's feed, newest first: its events, its tasks' and the project's own comments (--cursor pa...
 - `esteem pm projects comment` w: Comment on the project itself, its Activity tab
-- `esteem pm projects health` r: The project's Health tab: the health of each week, this week's closed, overdue and due tasks, the re...
+- `esteem pm projects health` r: The project's health: the health of each week, this week's closed, overdue and due tasks, the remind...
 - `esteem pm projects groups list` r: Every group, in sidebar order
 - `esteem pm projects groups create` w: Add a group at the end
 - `esteem pm projects groups rename` w: PATCH a group's label, icon or colour; the key stays
@@ -103,6 +103,7 @@ Generated from the CLI by `cargo run --example skill`; edit the CLI's help, neve
 - `esteem pm projects files url` r: A signed read link of 15 minutes
 - `esteem pm projects files trash` w: Move a file to the trash
 - `esteem pm projects files restore` w: Bring a file back from the trash
+- `esteem pm projects files move` w: Give a file another path, its versions kept; a live file there refuses it
 - `esteem pm projects pull` r machine: The project's files in a folder to work on, with a generated CLAUDE.md. Never overwrites a change: c...
 - `esteem pm projects push` w machine: Send the folder's changed files; nothing runs in the background. Newer on the serve...
 - `esteem pm projects links list` r: The project's links, oldest first
