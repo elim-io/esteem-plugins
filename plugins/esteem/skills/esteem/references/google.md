@@ -1,5 +1,5 @@
 ```toml
-[google]  # `esteem google`, part of the `esteem` CLI: Sheets, Docs, Drive; over the connector `esteem_apps_read` and `esteem_apps_write`
+[google]  # `esteem google`, part of the `esteem` CLI: Sheets, Docs, Drive, Calendar; over the connector `esteem_apps_read` and `esteem_apps_write`
 auth = "the person's own Google connection, through the server: `esteem apps connect google` gives the link once; no token on the machine (ADR-0710)"
 cmd = "commands are written without the leading `esteem google` (`sheets tabs <id>` = `esteem google sheets tabs <id>`)"
 output = "compact TSV/text by default (tabs between cells, newline between rows; no JSON noise), saves context tokens; `--json` on any command gives raw Google JSON"
@@ -38,7 +38,8 @@ markdown = "`update`/`import` let Drive do the conversion; don't parse markdown 
 middle = "there is no \"insert markdown into the middle of an existing doc\" primitive: edit the source .md and `docs update`, or `batch` with explicit structural requests"
 
 [drive]  # find, share, permissions, delete
-find = "`find \"Q3 Budget\"`: prints id, kind, name, url (also `drive find …`); `find \"Roadmap\" --type doc` filters, sheet | doc"
+find = "`find \"Q3 Budget\"`: prints id, kind, name, url (also `drive find …`); `find \"Roadmap\" --type doc` filters, sheet | doc | vid"
+vids = "Google Vids (docs.google.com/videos/d/<id>) are Drive files of kind `vid`: `find \"Recording\" --type vid`, `drive share|perms|rm` take their id or link; no editing API, the content is not readable"
 ls = "`drive ls https://drive.google.com/drive/folders/<id>`: a folder by id or folder URL, `root` = My Drive; prints id, kind, name, url; folders first, `--limit 100`"
 share = "`drive share <id> [scope] [--role R] [--notify]`: scope = who, `--role` = how; `<id>` is id or URL"
 anyone = "`share <id> --anyone`: ALL, anyone with the link"
@@ -50,6 +51,14 @@ notify = "notifications are off by default: users get silent access unless `--no
 owner = "sharing with the file's owner is a no-op (returns the existing owner grant)"
 perms = "`drive perms <id>`: prints permId, type, role, who"
 rm = "`drive rm <id>`: to trash (recoverable in Drive); `rm <id> --hard`: permanent delete, irreversible"
+
+[calendar]  # the person's own Google Calendar; nobody is invited and nobody is mailed (sendUpdates=none)
+list = "`calendar list`: id, summary, accessRole, primary, timeZone of every calendar on the list"
+events = "`calendar events --from 2026-11-23 --to 2026-11-30`: id, start, end, summary, status, transparency; recurring events expanded, by start; times in the calendar's zone with the offset, an all-day event shows its date; --from defaults to now, --to is exclusive; a bare date or YYYY-MM-DDTHH:MM is read in the calendar's zone; `--calendar a@elim.io` (default primary), `--limit 100`"
+add = "`calendar add --title \"Deep work\" --start 2026-11-24T10:00 --end 2026-11-24T12:00`: prints id, htmlLink; a wall time is read in `--tz` (default Europe/Moscow), RFC 3339 with an offset as is; `--description`, `--color 1-11`, `--calendar`; no attendees"
+import = "`calendar import @events.json`: MANY events in one call, never a loop of `add`; a JSON array of Calendar event resources (`{\"summary\":..,\"start\":{\"dateTime\":\"2026-11-24T10:00:00+03:00\"},\"end\":{..},\"colorId\":\"5\",\"transparency\":\"transparent\"}`), @file or `-`; prints id, start, summary a line; a failed one goes to stderr with its position, the rest are still added, then exit 1"
+rm = "`calendar rm <event id>`: deletes it, nobody mailed; `--calendar`"
+scope = "a connection made before the calendar scope answers 403 on calendar: `esteem apps connect google` once more"
 
 [flow]  # typical: locate, inspect, act (read narrow, write narrow)
 locate = "`find \"Projects\" --type sheet`"

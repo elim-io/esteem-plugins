@@ -45,7 +45,7 @@ Generated from the CLI by `cargo run --example skill`; edit the CLI's help, neve
 - `esteem notion trash` w: Move a page to Notion's trash
 - `esteem notion me` r: Who the connection is
 - `esteem notion api` w: Any API call: api GET pages/<id> · api PATCH blocks/<id> '{json}' · @file or - for the body
-- `esteem google find` r: Find Sheets/Docs in Drive by name → id, kind, name, url
+- `esteem google find` r: Find Sheets/Docs/Vids in Drive by name → id, kind, name, url
 - `esteem google sheets tabs` r: List tabs → gid, title, rows x cols
 - `esteem google sheets read` r: Read a range (e.g. "Sheet1!A1:D") as TSV
 - `esteem google sheets write` w: Overwrite a range. VALUES = TSV, JSON 2D array, @file or `-` (stdin)
@@ -63,8 +63,13 @@ Generated from the CLI by `cargo run --example skill`; edit the CLI's help, neve
 - `esteem google docs clear` w: Empty the document body (delete all content)
 - `esteem google docs create` w: Create a new document
 - `esteem google docs batch` w: Raw documents.batchUpdate (REQUESTS = JSON array/body, @file or `-`)
-- `esteem google drive find` r: Find files by name (same as top-level `find`)
+- `esteem google drive find` r: Find files by name (same as top-level `find`): --type sheet | doc | vid
 - `esteem google drive share` w: Grant access. Scope flags: --user (private), --domain (org), --anyone (all)
 - `esteem google drive ls` r: List a folder (id or folder URL) → id, kind, name, url; folders first
 - `esteem google drive perms` r: List who has access → permId, type, role, who
 - `esteem google drive rm` w: Delete a file: default trashes it; --hard deletes permanently
+- `esteem google calendar list` r: Calendars on your list → id, summary, accessRole, primary, timeZone
+- `esteem google calendar events` r: Events, recurring ones expanded, by start → id, start, end, summary, status, transparency
+- `esteem google calendar add` w: Add one event, no attendees, nobody mailed → id, htmlLink
+- `esteem google calendar import` w: Add many events at once. EVENTS = JSON array of Calendar event resources, @file or `-` → id, start, ...
+- `esteem google calendar rm` w: Delete an event, nobody mailed

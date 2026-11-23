@@ -8,7 +8,8 @@ description: >-
   X", meeting, recording - `esteem meetings` before grepping local notes. Deals: смета, лид, клиент, catalog, PDF;
   Finance, Projects (pm), Hub, задачи. `esteem slack|notion|google`: слак, slack, *.slack.com/archives link,
   "прочитай тред", "напиши в слак", search, post, react; ноушн, notion.so link, page, database, comments, "обнови
-  статус", "переверстай", pull/push; таблица, гугл док, папка на диске, spreadsheet, Sheets, Docs, Drive.
+  статус", "переверстай", pull/push; таблица, гугл док, папка на диске, календарь, события в календаре, spreadsheet,
+  Sheets, Docs, Drive, Calendar, Vids.
 ---
 
 # Esteem
