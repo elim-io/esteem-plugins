@@ -37,7 +37,7 @@ Generated from the CLI by `cargo run --example skill`; edit the CLI's help, neve
 - `esteem matching clear` w: Clear all of a transaction's matches
 - `esteem cashflow pivot` r: The cashflow pivot: by week, month, quarter or year and any grouping; obligations, transactions, FX
 - `esteem cashflow cell` r: Drill one pivot cell down to its obligations
-- `esteem cashflow freecash` r: Free cash per account + projection
+- `esteem cashflow freecash` r: Free cash by month: the forecast less the pass-through float, its lowest point, per account
 - `esteem cashflow facets` r: Distinct filter values present in the scoped data
 - `esteem cashflow views list` r: List saved views
 - `esteem cashflow views create` w: Create a saved view
