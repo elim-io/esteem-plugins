@@ -74,6 +74,14 @@ Generated from the CLI by `cargo run --example skill`; edit the CLI's help, neve
 - `esteem estimates legal-entities get` r: Get one invoicing entity by id (omit the id for the org's default)
 - `esteem estimates summary` r: Quick stats + validation — is this estimate correctly filled in
 - `esteem estimates validate` r: Validation only — the full rule report with fix hints; exits non-zero on errors so scripted/agent fl...
+- `esteem documents list` r: The registry: every document (a company's with --company), newest first
+- `esteem documents show` r: One document by its number (ELG-884): its rows, payments, history, files
+- `esteem documents types` r: The document types (the built-in five and the organisation's own)
+- `esteem documents create` w: A new document, or an existing paper brought in with --number and --status
+- `esteem documents status` w: Move a document's status: draft, sent, signed, accepted, void (payments set paid)
+- `esteem documents attach` w disk: Attach a file (the signed scan) to a document
+- `esteem documents link` w: The public link: --open prints it, --close closes it
+- `esteem documents invite` w: Share with an address: a guest reads the document's company; nobody yet = an invitation
 - `esteem leads list` r: List leads with optional filters
 - `esteem leads get` r: Get one lead plus its linked estimates
 - `esteem leads create` w: Create a new lead
