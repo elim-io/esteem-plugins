@@ -70,6 +70,6 @@ Generated from the CLI by `cargo run --example skill`; edit the CLI's help, neve
 - `esteem google drive rm` w: Delete a file: default trashes it; --hard deletes permanently
 - `esteem google calendar list` r: Calendars on your list → id, summary, accessRole, primary, timeZone
 - `esteem google calendar events` r: Events, recurring ones expanded, by start → id, start, end, summary, status, transparency
-- `esteem google calendar add` w: Add one event, no attendees, nobody mailed → id, htmlLink
+- `esteem google calendar add` w: Add one event; nobody invited or mailed unless --attendee → id, htmlLink
 - `esteem google calendar import` w: Add many events at once. EVENTS = JSON array of Calendar event resources, @file or `-` → id, start, ...
 - `esteem google calendar rm` w: Delete an event, nobody mailed
