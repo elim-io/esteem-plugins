@@ -9,6 +9,12 @@ Generated from the CLI by `cargo run --example skill`; edit the CLI's help, neve
 - `esteem apps read` r: Reads from a service, in parallel on the server; the same REQUEST as `call`. A write is refused: it ...
 - `esteem apps call` w: Requests to a service, in parallel on the server. REQUEST: `conversations.history channel=C1 limit=5...
 - `esteem apps resolve` r: Which service a link belongs to, and the link to connect it when it is not connected
+- `esteem elapse status` r: Whether Elapse is connected: the Mac, its time zone, when it last sent
+- `esteem elapse today` r: Today on the connected Mac: Active, Not in a project, each project, each app
+- `esteem elapse report` r: A day, a week (Monday first) or a month: Active, Not in a project, each project, each app, each day
+- `esteem elapse uncategorized` r: Not in a project: its apps and their window titles (what a rule in Elapse would catch)
+- `esteem elapse export` r: Every window of a range: start, end, app, title, project
+- `esteem elapse disconnect` w: Stop Elapse sending and erase its copy in Esteem; the Mac keeps every day
 - `esteem slack whoami` r: Who the connection belongs to, which workspace, the time zone used for output
 - `esteem slack read` r: Channel history, or a whole thread when given a message URL or CHANNEL/TS
 - `esteem slack info` r: A channel's topic, purpose, creator, members, canvases, pinned messages and bookmarks

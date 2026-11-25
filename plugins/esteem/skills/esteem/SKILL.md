@@ -61,6 +61,13 @@ and gives the link for one that is not. A service not connected or needing a rec
 line with the link, hand it to the person as it stands. Read the reference before the first call: `references/slack.md`,
 `references/notion.md`, `references/google.md`.
 
+## Elapse
+
+The person's tracked time from Elapse on their Mac, as the Mac sent it: `esteem elapse today`,
+`esteem elapse report --range week` ("what did I work on this week"), `esteem elapse uncategorized`,
+`esteem elapse export --json`; over the connector in `esteem_apps_read`. Only the person's own. Not
+connected: the error says to connect it in Elapse (AI & CLI, Connect to Esteem); hand that line on.
+
 ## When it fails
 
 - Not installed: `curl -fsSL https://cli.esteem.team/install.sh | bash` (Windows:
