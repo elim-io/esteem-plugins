@@ -89,6 +89,7 @@ Generated from the CLI by `cargo run --example skill`; edit the CLI's help, neve
 - `esteem documents link` w: The public link: --open prints it, --close closes it
 - `esteem documents invite` w: Share with an address: a guest reads the document's company; nobody yet = an invitation
 - `esteem documents estimates` r: A company's estimates as its guest reads them: sent or approved, or named by a live document; the se...
+- `esteem documents projects` r: A company's projects as its guest reads them: health, the last update's first line, the estimates th...
 - `esteem comments list` r: The threads you read, oldest first; narrowed by company, object and state
 - `esteem comments show` r: One thread: its object, block, the block's words when it began, every message
 - `esteem comments add` w: A word on a whole document (--doc) or estimate (--estimate): to its open thread, else a new one
