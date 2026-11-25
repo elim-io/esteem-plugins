@@ -95,6 +95,7 @@ Generated from the CLI by `cargo run --example skill`; edit the CLI's help, neve
 - `esteem comments add` w: A word on a whole document (--doc) or estimate (--estimate): to its open thread, else a new one
 - `esteem comments reply` w: A reply to a thread; --share opens a team's thread to the company
 - `esteem comments resolve` w: Resolve a thread, or --reopen it
+- `esteem comments file` r: A message's file: its download link for 15 minutes
 - `esteem leads list` r: List leads with optional filters
 - `esteem leads get` r: Get one lead plus its linked estimates
 - `esteem leads create` w: Create a new lead
