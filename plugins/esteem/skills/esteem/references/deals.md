@@ -83,7 +83,8 @@ Generated from the CLI by `cargo run --example skill`; edit the CLI's help, neve
 - `esteem documents templates show` r: One template: its blocks, table and text in each language
 - `esteem documents templates set` w: A new template, or one changed by --id: only the flags given
 - `esteem documents templates rm` w: Remove a template
-- `esteem documents create` w: A new document, or an existing paper brought in with --number and --status
+- `esteem documents create` w: A new document, or an existing paper brought in with --number and --status; its rows from an estimat...
+- `esteem documents update` w: Change a draft, or correct a paper brought in with its status while nothing is paid on it: number, t...
 - `esteem documents status` w: Move a document's status: draft, sent, signed, accepted, void (paid: the transactions matched in Fin...
 - `esteem documents attach` w disk: Attach a file (the signed scan) to a document
 - `esteem documents link` w: The public link: --open prints it, --close closes it
