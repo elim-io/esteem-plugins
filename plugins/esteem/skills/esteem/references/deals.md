@@ -88,10 +88,11 @@ Generated from the CLI by `cargo run --example skill`; edit the CLI's help, neve
 - `esteem documents attach` w disk: Attach a file (the signed scan) to a document
 - `esteem documents link` w: The public link: --open prints it, --close closes it
 - `esteem documents invite` w: Share with an address: a guest reads the document's company; nobody yet = an invitation
-- `esteem documents comments list` r: The threads you read, oldest first (a company's with --company)
-- `esteem documents comments add` w: A word on a whole document (--doc) or estimate (--estimate): to its open thread, else a new one
-- `esteem documents comments reply` w: A reply to a thread; --share opens a team's thread to the company
-- `esteem documents comments resolve` w: Resolve a thread, or --reopen it
+- `esteem comments list` r: The threads you read, oldest first; narrowed by company, object and state
+- `esteem comments show` r: One thread: its object, block, the block's words when it began, every message
+- `esteem comments add` w: A word on a whole document (--doc) or estimate (--estimate): to its open thread, else a new one
+- `esteem comments reply` w: A reply to a thread; --share opens a team's thread to the company
+- `esteem comments resolve` w: Resolve a thread, or --reopen it
 - `esteem leads list` r: List leads with optional filters
 - `esteem leads get` r: Get one lead plus its linked estimates
 - `esteem leads create` w: Create a new lead
