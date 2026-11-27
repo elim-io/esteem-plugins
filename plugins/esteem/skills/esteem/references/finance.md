@@ -15,6 +15,7 @@ Generated from the CLI by `cargo run --example skill`; edit the CLI's help, neve
 - `esteem transactions restore` w: Restore a trashed transaction (the record only — matches do not come back)
 - `esteem transactions purge` w: Permanently purge one trashed transaction (hard delete)
 - `esteem transactions transfer create` w: Create an internal transfer (outflow on --from + inflow on --to)
+- `esteem transactions transfer update` w: Change a transfer: both legs in one write, a refusal stores neither
 - `esteem transactions transfer split` w: Detach a transfer pair into two independent transactions
 - `esteem transactions transfer merge` w: Link two existing opposite-direction transactions into a transfer
 - `esteem transactions match` w: Replace a transaction's obligation-line matches (--alloc set)
