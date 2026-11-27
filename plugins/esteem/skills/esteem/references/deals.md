@@ -55,7 +55,7 @@ Generated from the CLI by `cargo run --example skill`; edit the CLI's help, neve
 - `esteem estimates plan apply-template` w: Apply a service template's whole role composition to a plan line — replaces existing allocations, au...
 - `esteem estimates allocation list` r: List allocation lines, optionally filtered by plan line/period/role
 - `esteem estimates allocation set` w: Upsert (plan line, role, period) cells — the recommended command; `--file cells.toml` batches many c...
-- `esteem estimates allocation create` w: Raw: create an allocation line with every field explicit
+- `esteem estimates allocation create` w: Raw: create an allocation line with every field explicit; a cell (plan line, role, period) that alre...
 - `esteem estimates allocation update` w: Raw: patch an existing allocation line
 - `esteem estimates allocation delete` w: Delete one or more allocation lines (many ids = one connection)
 - `esteem estimates allocation reorder` w: Set the display order of every allocation line on an estimate in one call
@@ -76,27 +76,40 @@ Generated from the CLI by `cargo run --example skill`; edit the CLI's help, neve
 - `esteem estimates validate` r: Validation only — the full rule report with fix hints; exits non-zero on errors so scripted/agent fl...
 - `esteem documents list` r: The registry: every document (a company's with --company), newest first
 - `esteem documents show` r: One document by its number (ELG-884): its rows, payments, history, files
-- `esteem documents types list` r: Every one of them
+- `esteem documents types list` r: Every one of them; DOCS = its live documents (an Owner or Admin sees the count)
 - `esteem documents types set` w: A new type, or one changed by --id: only the flags given
 - `esteem documents types rm` w: Remove an organisation's own type (the built-in five stay)
-- `esteem documents templates list` r: Every one of them
-- `esteem documents templates show` r: One template: its blocks, table and text in each language
+- `esteem documents templates list` r: Every one of them; DOCS = the live documents made from it (an Owner or Admin sees the count)
+- `esteem documents templates show` r: One template: its sections, its design and text in each language
 - `esteem documents templates set` w: A new template, or one changed by --id: only the flags given
-- `esteem documents templates rm` w: Remove a template
+- `esteem documents templates draw` r machine: Its pages as SVG files, on the built-in sample, a document of its type or an estimate's rows
+- `esteem documents templates rm` w: Remove a template (a type's default stays: make another the default first)
 - `esteem documents create` w: A new document, or an existing paper brought in with --number and --status; its rows from an estimat...
 - `esteem documents update` w: Change a draft, or correct a paper brought in with its status: its number always, text and rows whil...
+- `esteem documents sections list` r: A document's sections in their order: id, kind, on, title (--json: each whole)
+- `esteem documents sections add` w: A new section of a kind: title, parties, text, rows, totals, timeline, resources, summary, signature...
+- `esteem documents sections set` w disk: A section changed whole from a file of its JSON (`sections list --json` gives it); its id names it
+- `esteem documents sections move` w: Move a section after another (--after unset = first)
+- `esteem documents sections rm` w: Remove a section
+- `esteem documents design show` r: The organisation's design: its overrides of the built-in look (unset = built in)
+- `esteem documents design set` w disk: Save the organisation's design whole from a file of its JSON (`design show --json` gives it)
+- `esteem documents print` r disk: A document's PDF as the server lays it out
+- `esteem documents pages` r machine: A document's pages as SVG files
 - `esteem documents status` w: Move a document's status: draft, sent, signed, accepted, void (paid: the transactions matched in Fin...
+- `esteem documents rm` w: Delete a draft (its number goes back when it was the last)
 - `esteem documents attach` w disk: Attach a file (the signed scan) to a document
 - `esteem documents link` w: The public link: --open prints it, --close closes it
 - `esteem documents invite` w: Share with an address: a guest reads the document's company; nobody yet = an invitation
 - `esteem documents estimates` r: A company's estimates as its guest reads them: sent or approved, or named by a live document; the se...
 - `esteem documents projects` r: A company's projects as its guest reads them: health, the last update's first line, the estimates th...
+- `esteem documents who` r: Who has the document open now: each person once, whether they may type, since when
 - `esteem comments list` r: The threads you read, oldest first; narrowed by company, object and state
 - `esteem comments show` r: One thread: its object, block, the block's words when it began, every message
-- `esteem comments add` w: A word on a whole document (--doc) or estimate (--estimate): to its open thread, else a new one
+- `esteem comments add` w: A word on a whole document (--doc), on words of its text (--doc --quote) or on an estimate (--estima...
 - `esteem comments reply` w: A reply to a thread; --share opens a team's thread to the company
 - `esteem comments resolve` w: Resolve a thread, or --reopen it
 - `esteem comments file` r: A message's file: its download link for 15 minutes
+- `esteem comments team` r: Who a comment may name (--mention): the team that reads Deals
 - `esteem leads list` r: List leads with optional filters
 - `esteem leads get` r: Get one lead plus its linked estimates
 - `esteem leads create` w: Create a new lead
