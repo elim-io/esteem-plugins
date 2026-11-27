@@ -82,7 +82,7 @@ Generated from the CLI by `cargo run --example skill`; edit the CLI's help, neve
 - `esteem currencies config` r: Show the currency config (base + enabled + last fetch)
 - `esteem currencies coverage` r: Per-target rate coverage (earliest/latest/count)
 - `esteem currencies rates` r: Convert `--pair <from>:<date>` into `--to`
-- `esteem currencies refresh` w: Pull latest rates from Frankfurter (finance-admin)
+- `esteem currencies refresh` w: Read the rates of the seven days to today from Frankfurter again (finance-admin)
 - `esteem currencies backfill` w: Backfill per-date history for a range (finance-admin)
 - `esteem currencies enable` w: Enable a currency (finance-admin)
 - `esteem currencies disable` w: Disable a currency (finance-admin)

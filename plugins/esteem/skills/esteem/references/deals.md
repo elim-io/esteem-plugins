@@ -10,7 +10,7 @@ Generated from the CLI by `cargo run --example skill`; edit the CLI's help, neve
 - `esteem estimates snapshot` r: Dump the whole editable state as ONE round-trippable TOML — edit it locally, then `apply` (ADR-0309)
 - `esteem estimates apply` w disk: Desired state: diff an edited snapshot against the live estimate and execute only the changes (rows ...
 - `esteem estimates update` w: Update header fields (name, company, legal entity, currency, tax, discount, locale)
-- `esteem estimates status` w: Set the status of one or many estimates (`--to` a status or a kind)
+- `esteem estimates status` w: Set the status of one or many estimates (`--to` a status or a kind). A sent or approved estimate is ...
 - `esteem estimates statuses list` r: List the statuses in order, with their kind and how many estimates are on each
 - `esteem estimates statuses add` w: Add a status of a kind
 - `esteem estimates statuses rename` w: Rename a status
