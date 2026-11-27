@@ -89,7 +89,7 @@ Generated from the CLI by `cargo run --example skill`; edit the CLI's help, neve
 - `esteem currencies disable` w: Disable a currency (finance-admin)
 - `esteem currencies base` w: Set the base currency (finance-admin)
 - `esteem currencies set-rate` w: Set a manual rate override (finance-admin)
-- `esteem entities list` r: List finance entities
+- `esteem entities list` r: List finance entities (a Deals member without Finance reads every name; a scoped Finance member the ...
 - `esteem entities get` r: Get one finance entity by id
 - `esteem entities create` w: Create a finance entity (finance-admin)
 - `esteem entities update` w: Update a finance entity (finance-admin)
