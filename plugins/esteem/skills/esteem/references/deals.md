@@ -103,6 +103,11 @@ Generated from the CLI by `cargo run --example skill`; edit the CLI's help, neve
 - `esteem documents pages` r machine: A document's pages as SVG files
 - `esteem documents status` w: Move a document's status: draft, sent, signed, accepted, void (paid: the transactions matched in Fin...
 - `esteem documents rm` w: Delete a draft (its number goes back when it was the last)
+- `esteem documents replace` w: «Заменить новым»: a draft of the same type, rows and text; this one goes void when it is signed
+- `esteem documents close` w: Close a partly paid invoice at the paid amount
+- `esteem documents file list` r: The document's files: id, name, size, when
+- `esteem documents file get` r: A file (by its id or name): its download link for 15 minutes, or the file itself into --out
+- `esteem documents file rm` w: Remove a file from the document
 - `esteem documents attach` w disk: Attach a file (the signed scan) to a document
 - `esteem documents link` w: The public link: --open prints it, --close closes it
 - `esteem documents invite` w: Share with an address: a guest reads the document's company; nobody yet = an invitation
