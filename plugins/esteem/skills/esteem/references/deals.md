@@ -74,7 +74,7 @@ Generated from the CLI by `cargo run --example skill`; edit the CLI's help, neve
 - `esteem estimates legal-entities get` r: Get one invoicing entity by id (omit the id for the org's default)
 - `esteem estimates summary` r: Quick stats + validation — is this estimate correctly filled in
 - `esteem estimates validate` r: Validation only — the full rule report with fix hints; exits non-zero on errors so scripted/agent fl...
-- `esteem documents list` r: The registry: every document (a company's with --company), newest first
+- `esteem documents list` r: The registry, newest first, read by pages; --company, --type, --status, --estimate, --search narrow ...
 - `esteem documents show` r: One document by its number (ELG-884): its rows, payments, history, files
 - `esteem documents types list` r: Every one of them; DOCS = its live documents (an Owner or Admin sees the count)
 - `esteem documents types set` w: A new type, or one changed by --id: only the flags given
@@ -83,8 +83,13 @@ Generated from the CLI by `cargo run --example skill`; edit the CLI's help, neve
 - `esteem documents templates show` r: One template: its sections, its design and text in each language
 - `esteem documents templates set` w: A new template, or one changed by --id: only the flags given
 - `esteem documents templates draw` r machine: Its pages as SVG files, on the built-in sample, a document of its type or an estimate's rows
+- `esteem documents templates rename` w: Change a template's name only
+- `esteem documents templates duplicate` w: A copy of a template (never the default; no --name = «<name> (копия)»)
+- `esteem documents templates default` w: Make a template its type's default
+- `esteem documents templates archive` w: Hide a template from the pickers (the type's default is refused); `list --archived` shows it
+- `esteem documents templates restore` w: Bring an archived template back
 - `esteem documents templates rm` w: Remove a template (a type's default stays: make another the default first)
-- `esteem documents create` w: A new document, or an existing paper brought in with --number and --status; its rows from an estimat...
+- `esteem documents create` w: A new document, the create window's choices and defaults (--dry-run shows it, stores nothing), or a ...
 - `esteem documents update` w: Change a draft, or correct a paper brought in with its status: its number always, text and rows whil...
 - `esteem documents sections list` r: A document's sections in their order: id, kind, on, title (--json: each whole)
 - `esteem documents sections add` w: A new section of a kind: title, parties, text, rows, totals, timeline, resources, summary, signature...
@@ -93,6 +98,7 @@ Generated from the CLI by `cargo run --example skill`; edit the CLI's help, neve
 - `esteem documents sections rm` w: Remove a section
 - `esteem documents design show` r: The organisation's design: its overrides of the built-in look (unset = built in)
 - `esteem documents design set` w disk: Save the organisation's design whole from a file of its JSON (`design show --json` gives it)
+- `esteem documents design logo` w: The paper's logo: a PNG, JPEG or SVG file up to 1 MB uploaded, or --off for none
 - `esteem documents print` r disk: A document's PDF as the server lays it out
 - `esteem documents pages` r machine: A document's pages as SVG files
 - `esteem documents status` w: Move a document's status: draft, sent, signed, accepted, void (paid: the transactions matched in Fin...
